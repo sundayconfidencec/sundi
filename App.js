@@ -5,6 +5,8 @@ import Signup from './components/Signup';
 import Online from './components/Online';
 import Add from './Add';
 import Payment from "./Payment";
+import Woman from './Woman';
+import Preview from "./Preview"
 
 class App extends Component {
   render() {
@@ -14,8 +16,12 @@ class App extends Component {
             {/* <Login/> */}
             {/* <Signup /> */}
             {/* <Online /> */}
-            <Add/>
+            {/* <Add/> */}
             {/* <Payment /> */}
+            {/* <Woman /> */}
+            <Preview />
+          
+
             
           </View>
     )
@@ -27,7 +33,9 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    marginBottom: 30,
+   
+   
+   
   }
   
 });
