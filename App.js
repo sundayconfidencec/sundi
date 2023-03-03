@@ -1,41 +1,31 @@
 import { StyleSheet,View} from 'react-native';
 import React, { Component } from 'react';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Online from './components/Online';
-import Add from './Add';
-import Payment from "./Payment";
+import {NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Login from './Login';
+import Signup from './Signup';
+import Add from './src/screens/Add';
+import Payment from "./src/screens/Payment";
+import Online from './src/screens/Online';
 import Woman from './Woman';
-import Preview from "./Preview"
+import Preview from "./Preview";
 
-class App extends Component {
-  render() {
-    return (
-          <View style={styles.container}>
-        
-            {/* <Login/> */}
-            {/* <Signup /> */}
-            {/* <Online /> */}
-            {/* <Add/> */}
-            {/* <Payment /> */}
-            {/* <Woman /> */}
-            <Preview />
-          
 
-            
-          </View>
-    )
-  }
+const stack = createStackNavigator()
+
+export default function App() {
+  return (
+    <NavigationContainer>
+
+      <stack.Navigator initialRouteName='OnlineShopping' screenOptions={{header: ()=> null}}>
+        <stack.Screen name='OnlineShopping' component={Online} />
+        <stack.Screen name='AddToCart' component={Add} />
+        <stack.Screen name='PaymentSucessfull' component={Payment} />
+      </stack.Navigator>
+
+      </NavigationContainer>
+  )
 }
-export default App;
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex:1,
-   
-   
-   
-  }
-  
-});

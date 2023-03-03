@@ -1,50 +1,55 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, View, StyleSheet, Text, ScrollView, Image} from 'react-native';
 import online from "../assets/online.png";
-export default class 
- extends Component {
-  render() {
-    return (
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <View>
-        <Text style={styles.loginHead}>ONLINE SHOPPING</Text>
-        </View>
-        <View style={styles.loginTextContainer}>
-            <Text style={styles.loginText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
-        </View>
 
-        <View style={styles.imagecontainer}>
-        <Image source={online} style={styles.image}/>
-        </View>
+export default function Online({navigation}) {
+  return (
+    
+<ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+  <View>
+  <Text style={styles.loginHead}>ONLINE SHOPPING</Text>
+  </View>
+  <View style={styles.loginTextContainer}>
+      <Text style={styles.loginText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
+  </View>
 
-        <View>
+  <View style={styles.imagecontainer}>
+  <Image source={online} style={styles.image}/>
+  </View>
 
-      <TouchableOpacity style={styles.bottonContainer}>
-        <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
-      </View>
+  <View>
 
-      <View style={styles.noAccountCountainer}>
-      </View>
-       <View style={styles.dots}>
-       <View style={styles.dot1}></View>
-        <View style={styles.dot2}></View>
-        <View style={styles.dot3}></View>
-       </View>
-        <Text style={styles.skipText}>Skip</Text>
-      </ScrollView>
-    )
-  }
+<TouchableOpacity onPress={()=>{
+    navigation.navigate("AddToCart", {newTitle: "oh from shopping"})
+}} style={styles.bottonContainer}>
+  <Text style={styles.buttonText}>Next</Text>
+</TouchableOpacity>
+</View>
+
+<View style={styles.noAccountCountainer}>
+</View>
+ <View style={styles.dots}>
+ <View style={styles.dot1}></View>
+  <View style={styles.dot2}></View>
+  <View style={styles.dot3}></View>
+ </View>
+ <TouchableOpacity onPress={()=>{
+    navigation.navigate("PaymentSucessfull")
+}}>
+
+  <Text style={styles.skipText}>Skip</Text>
+ </TouchableOpacity>
+</ScrollView>
+  )
 }
+
+
 
 const styles = StyleSheet.create({
 container:{
-    marginHorizontal:20,
     paddingHorizontal:20,
-    paddingTop:20,
-    marginTop: 80,
-   
-    borderRadius: 10,
+    paddingTop:50,
+   backgroundColor:"white",
     
 },
 image:{
@@ -55,7 +60,7 @@ image:{
     
 },
 imagecontainer:{
-    marginHorizontal: 20
+    marginHorizontal: 50
 },
 loginHead:{
     fontSize: 15,
@@ -79,7 +84,7 @@ backgroundColor: "#8C52FF",
 justifyContent: "center",
 alignItems: "center",
 marginVertical: 50,
-marginHorizontal: 50,
+marginHorizontal: 100,
 borderRadius: 30
 },
 buttonText:{
@@ -129,7 +134,7 @@ dots:{
     flexDirection: "row",
     position: "absolute",
     top: 610,
-    left: 115
+    left: 160
    
 }
 })
