@@ -1,10 +1,13 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, TextInput} from "react-native";
-function Cloth({image, name,rating,price}) {
+import {View, Text, Image, StyleSheet, TextInput, TouchableOpacity} from "react-native";
+import { useNavigation } from '@react-navigation/native';
+
+function Cloth({image, name,rating,price, description}) {
+  const navigation = useNavigation();
   return (
     
   <View style={styles.mainContainer}>
-         
+       <TouchableOpacity onPress={() => navigation.navigate("Preview", { image, name, description, rating, price })}>  
     <View style={styles.container}>
     <View style={styles.imageContainer}>
       <Image source={image} style={styles.image} />
@@ -16,6 +19,7 @@ function Cloth({image, name,rating,price}) {
      
     </View>
   </View>
+  </TouchableOpacity>
   </View>
   )
 }

@@ -18,13 +18,15 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      <stack.Navigator initialRouteName='OnlineShopping' screenOptions={{header: ()=> null}}>
-        <stack.Screen name='OnlineShopping' component={Online} />
+      <stack.Navigator initialRouteName='Woman' screenOptions={{header: ()=> null}}>
+        {/* <stack.Screen name='OnlineShopping' component={Online} />
         <stack.Screen name='AddToCart' component={Add} />
-        <stack.Screen name='PaymentSucessfull' component={Payment} />
+        <stack.Screen name='PaymentSucessfull' component={Payment} /> */}
+        <stack.Screen name='Woman' component={Woman} />
+        <stack.Screen name='Preview' component={Preview} />
       </stack.Navigator>
 
-      </NavigationContainer>
+    </NavigationContainer>
   )
 }
 

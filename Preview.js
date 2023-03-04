@@ -1,120 +1,133 @@
 import React from 'react';
-import {View, Text , FlatList, TextInput, StyleSheet,TouchableOpacity } from "react-native";
-import { useState } from 'react';
-import Clothes from './components/Clothes';
+import {View, Text ,Image, FlatList, TextInput, StyleSheet,TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
-function Preview() {
-    const [searchQuery, setSearchQuery] = useState('');
+function Preview({route, navigation}) {
+  const {image,  name, description, rating, price } = route.params;
 
-    const AllCloths = [
-        { name: "Black Jacket", rating: "⭐️⭐️⭐️⭐️⭐️", price: "99", image: require("./assets/j7.webp")},
-        // { name: "Purple Jacket", rating: "⭐️⭐️⭐️⭐️☆", price: "80", image: require("./assets/j8.webp")},
-        // { name: "Brown Jacket", rating: "⭐️⭐️⭐️⭐️⭐️", price: "140", image: require("./assets/j9.webp")},
-        // { name: "White Jacket", rating: "⭐️⭐️☆☆☆", price: "115", image: require("./assets/j13.webp")},
-        // { name: "Red Jacket", rating: "⭐️☆☆☆☆", price: "60", image: require("./assets/j14.webp")},
-        // { name: "Green Jacket ", rating: "⭐️⭐️⭐️☆☆", price: "59.99", image: require("./assets/j12.webp")},
-        ];
-
-  const filterWomanJacket = (jackets, query) => {
-    return jackets.filter(jacket => {
-      const name = jacket.name.toLowerCase();
-      const rating = jacket.rating.toLowerCase();
-      const price = jacket.price.toString();
-      const searchText = query.toLowerCase();
-      return (
-        name.includes(searchText) ||
-        rating.includes(searchText) ||
-        price.includes(searchText)
-      );
-    });
-  };
-  const filteredJackets = filterWomanJacket(AllCloths, searchQuery);
   return (
-  
-    
-    <View style={styles.container} >
-        <View style={styles.headicon}>
-            <View style={styles.icon1}>
-            <Ionicons   name="arrow-back-sharp" size={24} color="black" />
-            </View>
-            <View style={styles.icon2} >
-            <Ionicons  name="md-cart-outline" size={24} color="#5100ad" />
-            </View>
-          <View style={styles.heart}>
-          <EvilIcons name="heart" size={24} color="#5100ad" />
-          </View>
+    <View style={styles.mainContainer}>
+       <View>
+       <View style={styles.headerIcon}>
+       <TouchableOpacity onPress={()=>{
+    navigation.navigate("Woman")}}>
+            <Text><Ionicons name="arrow-back-sharp" size={24} color="black" /></Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+            <Text><Ionicons  name="md-cart-outline" size={24} color="#5100ad" /></Text>
+        </TouchableOpacity>
+        
+      </View>
+
+      <View style={styles.heartContainer}>
+        <TouchableOpacity>
+            <Text><EvilIcons name="heart" size={24} color="#5100ad" /></Text>
+        </TouchableOpacity>
+      </View>
+        </View> 
+     <View style={styles.container}>
+        <View style={styles.imageContainer}>
+
+      <Image style={styles.image} source={image} />
         </View>
-        
-        <FlatList
-        data={filteredJackets}
-        renderItem={({ item }) => (
-          <Clothes
-            image={item.image}
-            name={item.name}
-            rating={item.rating}
-            price={item.price}
-            
-          />
-        )}
-        keyExtractor={item => item.name}
-      />
-        
-    </View>
-    
-  )
+      <View style={styles.textInfo}>
+      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.rating}>Reviews: {rating}</Text>
+      <View style={styles.hr}></View>
+      <Text style={styles.description}>{description}</Text>
+     </View>
+      </View>
+      <View style={styles.btnContainer}>
+        <View style={styles.pricecontainer}>
+        <Text style={styles.total}>Amount</Text>
+      <Text style={styles.price}>${price}</Text>
+        </View>
+        <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btntext}>Add to cart</Text>
+        </TouchableOpacity>
+      </View>
+ </View>
+  );
 }
 
 const styles = StyleSheet.create({
+    mainContainer:{
+        // paddingVertical: 50,
+        // paddingHorizontal: 20
+       
+    },
     container: {
-        backgroundColor: "#f1f1f1",
-        paddingTop: 50,
-        paddingRight: 20,
-        paddingLeft: 20,
-        flex: 1
-        
-       
-      },
-   
-    headicon:{
-        justifyContent: "space-between",
-        flexDirection: "row"
+        backgroundColor: '#f1f1f1',
     },
-    headText:{
-        paddingVertical: 20,
-        color:"black",
-        fontWeight: "bold",
-        fontSize: 20
-    },
-    icon1:{
-        backgroundColor: "white",
-        height:28,
-        width: 28,
-        borderRadius:50,
-        paddingLeft: 2,
-        paddingTop: 2
-    },
-    icon2:{
-        backgroundColor: "white",
-        height:33,
-        width: 33,
-        borderRadius:50,
-        paddingLeft: 4,
-        paddingTop: 4
-    },
-    heart:{
-        position: "absolute",
-        top: 50,
-        left: 287,
-        backgroundColor: "white",
-        height:33,
-        width: 33,
-        borderRadius:50,
-        paddingLeft: 4,
-        paddingTop: 7,
-       
+    image: {
+    width: 300,
+    height: 350,
+    marginBottom: 20,
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+ 
+  headerIcon:{
+    flexDirection:"row",
+    justifyContent: "space-between",
+    paddingTop: 50,
+    paddingBottom: 20,
+    paddingHorizontal: 20
+  },
+  heartContainer:{
+    alignSelf: "flex-end",
+    marginRight: 20,
+    marginBottom: 11
+  },
+  imageContainer:{
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInfo:{
+    marginLeft: 30
+  },
+  hr:{
+    height: 5,
+    width: 45,
+    backgroundColor: "#5100ad",
+    borderRadius: 15,
+    marginLeft: 0,
+   marginVertical:10
+ },
+ total:{
+    color: "white",
+    fontWeight: "500"
+},
+btntext:{
+    color: "white",
+    fontWeight: "600"
+},
+btn:{
+    backgroundColor: "#5211dd",
+    padding: 11,
+    borderRadius: 5
+},
+btnContainer:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#5100ad",
+    marginTop: 40,
+    borderRadius: 15,
+    paddingHorizontal:12,
+    paddingVertical: 12
 
-    }
-  });
+ },
+ price:{
+    color:"#f1f1f1",
+    marginLeft: 15,
+    fontSize: 18,
+    fontWeight:"bold"
+ },
+});
+
 export default Preview;

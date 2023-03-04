@@ -4,16 +4,17 @@ import { useState } from 'react';
 import Cloth from './components/Cloth';
 import { Ionicons } from '@expo/vector-icons';
 
-function Woman() {
+function Woman({route, navigation}) {
+  console.log(route.params);
     const [searchQuery, setSearchQuery] = useState('');
 
     const AllCloths = [
-        { name: "Black Jacket", rating: "⭐️⭐️⭐️⭐️⭐️", price: "99", image: require("./assets/j7.webp")},
-        { name: "Purple Jacket", rating: "⭐️⭐️⭐️⭐️☆", price: "80", image: require("./assets/j8.webp")},
-        { name: "Brown Jacket", rating: "⭐️⭐️⭐️⭐️⭐️", price: "140", image: require("./assets/j9.webp")},
-        { name: "White Jacket", rating: "⭐️⭐️☆☆☆", price: "115", image: require("./assets/j13.webp")},
-        { name: "Red Jacket", rating: "⭐️☆☆☆☆", price: "60", image: require("./assets/j14.webp")},
-        { name: "Green Jacket ", rating: "⭐️⭐️⭐️☆☆", price: "59.99", image: require("./assets/j12.webp")},
+        {id:"1", name: "Black Jacket", rating: "⭐️⭐️⭐️⭐️⭐️", price: "99", image: require("./assets/j7.webp"), description: "Black long sleeve jacket with zipper. It's 89% cotton cozy and soft material."},
+        {id:"2", name: "Purple Jacket", rating: "⭐️⭐️⭐️⭐️☆", price: "80", image: require("./assets/j8.webp"),  description: "Purple long sleeve jacket with button. It's 89% cotton cozy and soft material."},
+        {id:"3", name: "Brown Jacket", rating: "⭐️⭐️⭐️⭐️⭐️", price: "140", image: require("./assets/j9.webp"), description: "Brown long sleeve jacket with ropes. It's 89% cotton cozy and soft material."},
+        {id:"4", name: "White Jacket", rating: "⭐️⭐️☆☆☆", price: "115", image: require("./assets/j13.webp"), description: "White long sleeve jacket with belt. It's 89% cotton cozy and soft material."},
+        {id:"5", name: "Red Jacket", rating: "⭐️☆☆☆☆", price: "60", image: require("./assets/j14.webp"), description: "red long sleeve jacket with zipper and button. It's 89% cotton cozy and soft material."},
+        {id:"6", name: "Green Jacket ", rating: "⭐️⭐️⭐️☆☆", price: "59.99", image: require("./assets/j12.webp"), description: "green long sleeve jacket with belt. It's 89% cotton cozy and soft material."},
         ];
 
   const filterWomanJacket = (jackets, query) => {
@@ -21,11 +22,13 @@ function Woman() {
       const name = jacket.name.toLowerCase();
       const rating = jacket.rating.toLowerCase();
       const price = jacket.price.toString();
+      const description = jacket.price.toString();
       const searchText = query.toLowerCase();
       return (
         name.includes(searchText) ||
         rating.includes(searchText) ||
-        price.includes(searchText)
+        price.includes(searchText) ||
+        description.includes(searchText)
       );
     });
   };
@@ -50,9 +53,11 @@ function Woman() {
         placeholderTextColor="gray"
         value={searchQuery}
         onChangeText={setSearchQuery} />
-         <TouchableOpacity style={styles.filter} onPress={searchQuery} >
+         <TouchableOpacity style={styles.filter}  >
         <Text style={styles.filterText}>Filter</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={()=>{navigation.navigate("Preview")}}>
         <FlatList
         data={filteredJackets}
         renderItem={({ item }) => (
@@ -61,12 +66,13 @@ function Woman() {
             name={item.name}
             rating={item.rating}
             price={item.price}
+            description={item.description}
             
           />
         )}
-        keyExtractor={item => item.name}
+        keyExtractor={item => item.id}
       />
-        
+        </TouchableOpacity>
     </View>
     
   )
@@ -77,7 +83,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#f2f2f2",
         paddingHorizontal: 30,
         paddingTop:50,
-        paddingBottom: 200
+       paddingBottom: 370
         
        
       },
